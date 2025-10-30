@@ -223,19 +223,21 @@
       selectedMode = mode;
     }
 
-    // Tin nhắn chào mừng dễ thương
+    // Tin nhắn chào mừng
     window.onload = function() {
       const chatBox = document.getElementById("chat-box");
       chatBox.innerHTML = `
         <div class="bot">
           <div class="avatar">🌸</div>
           <div>Xin chào, mình là <b>Chatbot Hỏi Đáp Thông Minh</b> 💕<br>
-          Mình ở đây để đồng hành cùng cậu trên con đường học tập phía trước đó nha! ✨</div>
+          Mình ở đây để giúp cậu học tập thật hiệu quả và vui vẻ nha! ✨</div>
         </div>
       `;
     };
 
-    const API_KEY = "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";
+    // --- CHATBOT API ---
+    const API_KEY = "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"; // <- thay bằng API key thật
+
     async function sendMessage() {
       const input = document.getElementById("input");
       const chatBox = document.getElementById("chat-box");
@@ -268,7 +270,7 @@
             messages: [
               {
                 role: "system",
-                content: `Bạn là chatbot học tập siêu đáng yêu của Tổ 3 lớp 12C9K23. Trả lời thân thiện, dễ hiểu, có thể chèn ký hiệu toán học LaTeX, và phong cách phù hợp với mục "${selectedMode}". Nếu có thể, thêm chút đáng yêu và hài hước 💖`
+                content: `Bạn là Chatbot Hỏi Đáp Thông Minh. Trả lời thân thiện, dễ hiểu, có thể dùng ký hiệu toán học LaTeX, và phong cách phù hợp với mục "${selectedMode}".`
               },
               { role: "user", content: userMsg }
             ]
@@ -276,11 +278,11 @@
         });
 
         const data = await response.json();
-        botDiv.innerHTML = `<div class="avatar">🌸</div><div>${data.choices?.[0]?.message?.content || "Ơ… hình như mình bị lỗi rồi 😅"}</div>`;
+        botDiv.innerHTML = `<div class="avatar">🌸</div><div>${data.choices?.[0]?.message?.content || "Ơ... hình như mình hơi lag 😅"}</div>`;
         MathJax.typesetPromise();
         chatBox.scrollTop = chatBox.scrollHeight;
       } catch {
-        botDiv.innerHTML = `<div class="avatar">🌸</div><div>Ối, mạng yếu quá, mình hông trả lời được 😭</div>`;
+        botDiv.innerHTML = `<div class="avatar">🌸</div><div>Ối, mạng yếu quá... mình chưa trả lời được 😭</div>`;
       }
     }
   </script>
